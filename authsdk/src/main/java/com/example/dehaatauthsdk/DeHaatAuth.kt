@@ -21,7 +21,7 @@ class DeHaatAuth {
     private var clientId: String
     private var isDebugMode: Boolean = false
     private var operationState: OperationState
-    private var keycloakDomain:String =""
+    private var keycloakDomain: String = ""
 
     private constructor(builder: MobileLoginBuilder) {
         operationState = OperationState.MOBILE_LOGIN
@@ -104,8 +104,8 @@ class DeHaatAuth {
                 return this
             }
 
-            fun enableDebugMode(keycloakDomain:String): MobileLoginBuilder{
-                isDebugMode =true
+            fun enableDebugMode(keycloakDomain: String): MobileLoginBuilder {
+                isDebugMode = true
                 this.keycloakDomain = keycloakDomain
                 return this
             }
@@ -129,8 +129,8 @@ class DeHaatAuth {
                 return this
             }
 
-            fun enableDebugMode(keycloakDomain:String): EmailLoginBuilder{
-                isDebugMode =true
+            fun enableDebugMode(keycloakDomain: String): EmailLoginBuilder {
+                isDebugMode = true
                 this.keycloakDomain = keycloakDomain
                 return this
             }
@@ -147,7 +147,7 @@ class DeHaatAuth {
             lateinit var loginResponseCallback: LoginResponseCallback
             lateinit var refreshToken: String
             lateinit var clientId: String
-            var isDebugMode:Boolean = false
+            var isDebugMode: Boolean = false
             var keycloakDomain: String = ""
 
             fun refreshToken(refreshToken: String): RenewTokenBuilder {
@@ -160,8 +160,8 @@ class DeHaatAuth {
                 return this
             }
 
-            fun enableDebugMode(keycloakDomain:String): RenewTokenBuilder{
-                isDebugMode =true
+            fun enableDebugMode(keycloakDomain: String): RenewTokenBuilder {
+                isDebugMode = true
                 this.keycloakDomain = keycloakDomain
                 return this
             }
@@ -178,7 +178,7 @@ class DeHaatAuth {
             lateinit var logoutCallback: LogoutCallback
             lateinit var idToken: String
             lateinit var clientId: String
-            var isDebugMode:Boolean = false
+            var isDebugMode: Boolean = false
             var keycloakDomain: String = ""
 
             fun idToken(idToken: String): LogoutBuilder {
@@ -191,8 +191,8 @@ class DeHaatAuth {
                 return this
             }
 
-            fun enableDebugMode(keycloakDomain:String): LogoutBuilder{
-                isDebugMode =true
+            fun enableDebugMode(keycloakDomain: String): LogoutBuilder {
+                isDebugMode = true
                 this.keycloakDomain = keycloakDomain
                 return this
             }
@@ -216,6 +216,8 @@ class DeHaatAuth {
             refreshToken != null &&
                     (JWT(refreshToken).claims["typ"]?.asString().equals("Offline") ||
                             Date(Calendar.getInstance().timeInMillis).before(JWT(refreshToken).expiresAt))
+
+        fun getSub(refreshToken: String) = JWT(refreshToken).claims["sub"]?.asString()
 
     }
 
